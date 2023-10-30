@@ -1,0 +1,87 @@
+@startuml "TAMAYA Dept.Store"
+
+entity user {
+    id : bigint(20) <<PK>>
+    name : varchar(100)
+    role : int(2)
+    email : varchar(255)
+    password : varchar(255)
+}
+
+entity jenis_member {
+  *id_jenis_member : bigint(20) <<PK>>
+  nama_jenis : varchar(40)
+  expired_member : bigint(100)
+  bayar_iuran : int(11)
+}
+
+entity member {
+  *member_id: bigint(20) <<PK>>
+  id_jenis_member: bigint(20) <<FK>>
+  customer: varchar(40)
+  kartu_member: bigint(20)
+  alamat_member : varchar(150)
+  no_telp : bigint(15)
+  is_active : tinyint(1)
+  created_at : bigint(140)
+}
+
+entity category_produk {
+    id_category : bigint(20) <<PK>>
+    nama_category : varchar(100)
+}
+
+entity produk {
+    id_produk : bigint(20) <<PK>>
+    id_category_produk : bigint(20) <<FK>>
+    nama_produk : varchar(100)
+    merek_produk : varchar(100)
+    qty : int(11)
+    harga : decimal(9, 2)
+}
+
+entity transaksi {
+    id_transaksi : bigint(20) <<PK>>
+    id_user : bigint(20) <<FK>>
+    id_member : bigint(20) <<FK>>
+    id_diskon : bigint(20) <<FK>>
+    status : tinyint(4)
+}
+
+entity detail_transaksi {
+    id_detail_transaksi : bigint(20) <<PK>>
+    id_transaksi : bigint(20) <<FK>>
+    id_produk : bigint(20) <<FK>>
+    sub_total: decimal(10, 2)
+    qty : int(11)
+}
+
+entity diskon {
+    id : bigint(20) <<PK>>
+    id_jenis_member : bigint(20) <<FK>>
+    persen_diskon : tinyint(4)
+}
+
+entity warehouse_management {
+    id : bigint(20) <<PK>>
+    id_produk : bigint(20) <<FK>>
+    id_sbin : bigint(20) <<FK>>
+}
+
+entity storage_bin {
+    id : bigint(20) <<PK>>
+    bin : varchar(100)
+}
+
+user ||-|| transaksi
+member ||--o{ transaksi
+jenis_member ||--|| member
+transaksi ||--o{ detail_transaksi
+transaksi ||--|| jenis_member
+produk ||--o{ detail_transaksi
+produk ||--|| category_produk
+diskon ||--|| jenis_member
+warehouse_management ||--o{ produk
+storage_bin ||--|| warehouse_management
+
+@enduml
