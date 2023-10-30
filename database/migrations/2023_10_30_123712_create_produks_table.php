@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_category_produk')->unsigned();
-            $table->string('nama_produk', 100);
-            $table->string('merk_produk', 100);
-            $table->string('image', 255);
-            $table->integer('qty', 11);
+            $table->string('nama_produk');
+            $table->string('merk_produk');
+            $table->string('image');
+            $table->integer('qty');
             $table->decimal('harga',9,2);
             $table->timestamps();
         });

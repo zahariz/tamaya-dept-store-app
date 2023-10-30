@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('jenis_members', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jenis', 40);
-            $table->bigInteger('expired_member', 100);
-            $table->integer('bayar_iuran', 100);
+            $table->string('nama_jenis');
+            $table->bigInteger('expired_member');
+            $table->integer('bayar_iuran');
             $table->timestamps();
         });
     }

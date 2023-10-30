@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\WarehouseManagementService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    private WarehouseManagementService $warehouseManagementService;
+
+    public function __construct(WarehouseManagementService $warehouseManagementService)
     {
-        $this->middleware('auth');
+        $this->warehouseManagementService = $warehouseManagementService;
     }
 
     /**
@@ -21,8 +20,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $data = $this->warehouseManagementService->getWarehouseBySearch($request->cari);
+        return view('produk', [
+            'data'=> $data
+        ]);
     }
 }

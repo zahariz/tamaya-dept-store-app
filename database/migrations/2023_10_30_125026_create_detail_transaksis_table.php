@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('id_transaksi')->unsigned();
             $table->bigInteger('id_produk')->unsigned();
             $table->decimal('sub_total',10,2)->default(0);
-            $table->integer('qty',11);
+            $table->integer('qty');
             $table->timestamps();
         });
     }
